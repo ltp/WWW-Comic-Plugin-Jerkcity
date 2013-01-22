@@ -6,10 +6,10 @@ use strict;
 use vars qw($VERSION @ISA %COMICS);
 
 our @V		= qw(SLURP SUCK GAG CHOKE HUFF GARGLE LICK JERK);
-our @N		= qw(DONGS BOOBIES BONGS DICKS PISS);
+our @N		= qw(DONGS BONGS DICKS PISS COCKS TITS);
 our $VERSION	= '0.080085';
 @ISA		= qw(WWW::Comic::Plugin);
-%COMICS		= ( jerkcity => 'Jerkcity - I SAW A GHOST');
+%COMICS		= ( jerkcity => 'Jerkcity');
 
 sub new {
 	my $class	= shift;
