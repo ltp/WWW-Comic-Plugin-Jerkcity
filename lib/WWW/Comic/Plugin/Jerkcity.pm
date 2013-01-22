@@ -4,21 +4,23 @@ use warnings;
 use strict;
 
 use vars qw($VERSION @ISA %COMICS);
+
+our @V		= qw(SLURP SUCK GAG CHOKE HUFF GARGLE LICK JERK);
+our @N		= qw(DONGS BOOBIES BONGS DICKS PISS);
 our $VERSION	= '0.080085';
 @ISA		= qw(WWW::Comic::Plugin);
 %COMICS		= ( jerkcity => 'Jerkcity - I SAW A GHOST');
 
 sub new {
-	my $class = shift;
-	my $self = { uri => 'http://www.jerkcity.com' };
+	my $class	= shift;
+	my $self	= { uri => 'http://www.jerkcity.com' };
 	bless $self, $class;
+	$self->{ua}	= $self->_new_agent;
 	return $self
 }
 
 sub strip_url {
 	my ( $self, %args ) = @_;
-
-	$self->{ua}	||= $self->_new_agent;
 
 	$self->{cur}	or do { my $r = $self->{ua}->get( "$self->{uri}/high.txt" );
 				chomp ( $self->{cur} = ( $r->is_success ? $r->content : 5121 ) ) };
@@ -27,6 +29,15 @@ sub strip_url {
 				? "$self->{uri}/jerkcity$args{id}.gif"
 				: "$self->{uri}/today.gif"
 			)
+}
+
+sub get_strip {
+	my ( $self, @args ) = @_;
+	my $agent = $self->{ua}->agent;
+	$self->{ua}->agent( $V[ int rand @V ] . " " . $N[ int rand @N ] . "/$VERSION" );
+	my $strip = $self->SUPER::get_strip( @args );
+	$self->{ua}->agent( $agent );
+	return $strip
 }
 
 =head1 NAME
@@ -63,6 +74,8 @@ interface.
 =item new
 
 Constructor - see L<WWW::Comic> for usage
+
+=back
 
 =cut
 
