@@ -7,7 +7,7 @@ use vars qw($VERSION @ISA %COMICS);
 
 our @V		= qw(SLURP SUCK GAG CHOKE HUFF GARGLE LICK JERK);
 our @N		= qw(DONGS BONGS DICKS PISS COCKS TITS);
-our $VERSION	= '0.080085';
+our $VERSION	= '0.8008135';
 @ISA		= qw(WWW::Comic::Plugin);
 %COMICS		= ( jerkcity => 'Jerkcity');
 
